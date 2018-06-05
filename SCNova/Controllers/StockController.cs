@@ -71,7 +71,7 @@ namespace SCNova.Controllers
                     StockTrade row = Db.Insert<StockTrade>();
                     row.Amount = rnd.Next(10, 1000);
                     row.StockSymbol = symbolList.OrderBy(e => Guid.NewGuid()).First();
-;                });
+                });
             }
 
             return Content("Populated!");

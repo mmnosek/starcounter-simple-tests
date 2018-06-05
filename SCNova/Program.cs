@@ -40,6 +40,7 @@ namespace SCNova
                 {
                     services.AddStarcounter(appHost);
                 })
+                .UseUrls("http://*:5106")
                 .UseStartup<Startup>()
                 .Build();
     }
