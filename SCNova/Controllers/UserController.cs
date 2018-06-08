@@ -27,5 +27,29 @@ namespace NovaSimplePerfTests.Controllers
 
             return Content("Added");
         }
+
+        [HttpGet("User/AddAsync/{username}/{password}")]
+        public async Task<IActionResult> AddAsync(string username, string password)
+        {
+            User user = null;
+
+            await Db.TransactAsync(() =>
+            {
+                user = Db.Insert<User>();
+                user.UserName = username;
+            });
+            await Db.TransactAsync(() =>
+            {
+                user.PasswordHash = Convert.ToBase64String(Encoding.UTF8.GetBytes(password));
+            });
+
+            return Content("Added");
+        }
+
+        [HttpGet("User/AddNoDb/{username}/{password}")]
+        public async Task<IActionResult> AddNoDb(string username, string password)
+        {
+            return Content("Added");
+        }
     }
 }
